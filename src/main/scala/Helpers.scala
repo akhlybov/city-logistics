@@ -41,9 +41,12 @@ object Helpers {
       p1 <- city1Params
       p2 <- city2Params
     } yield {
+      // convert to radians
       val List(city1Lat: Double, city1Lng: Double) = List(p1(1).toDouble, p1(2).toDouble).map(_ * 0.0174532925)
       val List(city2Lat: Double, city2Lng: Double) = List(p2(1).toDouble, p2(2).toDouble).map(_ * 0.0174532925)
 
+      // formula to compute distance on sphere
+      // https://en.wikipedia.org/wiki/Great-circle_distance
       acos( sin(city1Lat) * sin(city2Lat) + cos(city1Lat) * cos(city2Lat) * cos(city2Lng - city1Lng) ) * 6371.008
     }
 
